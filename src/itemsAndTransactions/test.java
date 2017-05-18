@@ -16,8 +16,10 @@ public class test {
     
 	public static void main(String[] args) {
         
-              System.out.println(itemsAndTransactions.AddItem.listBalance());
-        
+            ArrayList<InventoryItem> list=itemsAndTransactions.AddItem.listAllArrayList();
+            for(InventoryItem k:list) {  
+            System.out.println(k.getItemCode()+" "+k.getName()+" "+k.getUm()+" "+k.getItemQ()+" "+k.getPrice());
+            }
         }
 	
 }

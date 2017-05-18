@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -328,5 +329,70 @@ public class AddItem {
 
        return allItems;
     }
-    
+
+    public static ArrayList<InventoryItem> listAllArrayList(){
+       ArrayList<InventoryItem> ItemsList=new ArrayList<InventoryItem>();
+       String url = "jdbc:derby://localhost:1527/InventoryDB;create=true";
+       String driver = "org.apache.derby.jdbc.ClientDriver";
+       Connection connection = null;
+       Statement statement = null;
+       ResultSet resultSet = null;
+
+       try {
+           Class driverClass = Class.forName(driver);
+           connection = DriverManager.getConnection(url);
+           statement = connection.createStatement();
+
+           resultSet = statement.executeQuery("SELECT * FROM ITEMS");
+           int currentQ = 0;
+           String currentName = "", currentUM = "",currentCode = ""; 
+           float currentPrice = 0.0f;
+           float totalValue=0.0f;
+
+           while (resultSet.next()) {
+                   currentCode = resultSet.getString(1);
+                   currentName = resultSet.getString(2);
+                   currentQ = Integer.parseInt(resultSet.getString(3));
+                   currentUM = resultSet.getString(4);
+                   currentPrice = Float.parseFloat(resultSet.getString(5));
+                                      
+                   InventoryItem newItem=new InventoryItem(currentCode);
+                   newItem.setName(currentName);
+                   newItem.setItemQ(currentQ);
+                   newItem.setUm(currentUM);
+                   newItem.setPrice(currentPrice);        
+                   
+                   ItemsList.add(newItem);        
+                }
+                         
+           }catch(ClassNotFoundException e){
+               System.out.println(e.getMessage());
+            }catch(NumberFormatException e){
+               System.out.println(e.getMessage());    
+           } catch (SQLException e) {
+               System.out.println(e.getMessage());
+
+           } finally {
+               if (resultSet != null) {
+                   try {
+                       resultSet.close();
+                   } catch (SQLException ex) {
+                       System.out.println(ex);
+                   }
+               }
+               if (connection != null){
+                   try {
+                       connection.close();
+                   }
+                   catch (SQLException ex) {
+                       System.out.println(ex);
+                   }
+               }
+           }
+
+       return ItemsList;
+    }
+       
+       
+       
 }

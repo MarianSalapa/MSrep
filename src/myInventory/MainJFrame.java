@@ -19,7 +19,6 @@ public class MainJFrame extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         panel1 = new java.awt.Panel();
         Balance = new javax.swing.JButton();
-        Tranzactions = new javax.swing.JButton();
         Tranzactions1 = new javax.swing.JButton();
         Items1 = new javax.swing.JButton();
         Tranzactions2 = new javax.swing.JButton();
@@ -31,6 +30,7 @@ public class MainJFrame extends javax.swing.JFrame {
         Items4 = new javax.swing.JButton();
         Items5 = new javax.swing.JButton();
         Items6 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jDesktopPane = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -48,8 +48,6 @@ public class MainJFrame extends javax.swing.JFrame {
                 BalanceActionPerformed(evt);
             }
         });
-
-        Tranzactions.setText("Balance at...");
 
         Tranzactions1.setText("Input");
         Tranzactions1.addActionListener(new java.awt.event.ActionListener() {
@@ -108,20 +106,23 @@ public class MainJFrame extends javax.swing.JFrame {
 
         Items6.setText("Transaction from ...");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 3, 13));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("myInventory ");
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Balance, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                            .addComponent(Tranzactions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Tranzactions1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Tranzactions1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                             .addComponent(Items1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Tranzactions2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Items2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -130,19 +131,27 @@ public class MainJFrame extends javax.swing.JFrame {
                             .addComponent(Items5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Items6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jLabel3)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(panel1Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(Balance, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Balance)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Tranzactions)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Tranzactions1)
@@ -241,7 +250,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_Items2ActionPerformed
 
     private void Items3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Items3ActionPerformed
-        frames.ItemsListFrame itemslist = new frames.ItemsListFrame();
+        frames.AllItemsTableFrame itemslist = new frames.AllItemsTableFrame();
         jDesktopPane.add(itemslist);
         itemslist.show();
     }//GEN-LAST:event_Items3ActionPerformed
@@ -320,13 +329,13 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton Items4;
     private javax.swing.JButton Items5;
     private javax.swing.JButton Items6;
-    private javax.swing.JButton Tranzactions;
     private javax.swing.JButton Tranzactions1;
     private javax.swing.JButton Tranzactions2;
     private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
