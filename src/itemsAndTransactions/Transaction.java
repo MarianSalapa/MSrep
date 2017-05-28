@@ -14,6 +14,9 @@ public class Transaction {
  private float price;
  private String Date,type,code,description;
 
+    public Transaction(int no) {
+        this.no = no;
+    } 
     public int getNo() {
         return no;
     }
@@ -28,10 +31,6 @@ public class Transaction {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Transaction(int no) {
-        this.no = no;
     }
 
     public int getQ() {

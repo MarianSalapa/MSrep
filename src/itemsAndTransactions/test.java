@@ -16,9 +16,9 @@ public class test {
     
 	public static void main(String[] args) {
         
-            ArrayList<InventoryItem> list=itemsAndTransactions.AddItem.listAllArrayList();
-            for(InventoryItem k:list) {  
-            System.out.println(k.getItemCode()+" "+k.getName()+" "+k.getUm()+" "+k.getItemQ()+" "+k.getPrice());
+            ArrayList<Transaction> list=itemsAndTransactions.AddTransaction.listAllTrArrayList();
+            for(Transaction k:list) {  
+            System.out.println(k.getNo()+" "+k.getDescription()+" "+k.getQ()+" "+k.getPrice()+" "+k.getDate()+" "+k.getType()+" "+k.getCode());
             }
         }
 	

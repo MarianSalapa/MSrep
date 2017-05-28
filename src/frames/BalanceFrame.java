@@ -5,6 +5,11 @@
  */
 package frames;
 
+import itemsAndTransactions.AddTransaction;
+import itemsAndTransactions.InventoryItem;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author MMM
@@ -16,9 +21,43 @@ public class BalanceFrame extends javax.swing.JInternalFrame {
      */
     public BalanceFrame() {
         initComponents();
-        jTextArea1.setText(itemsAndTransactions.AddItem.listBalance());
+        //jTextArea1.setText(itemsAndTransactions.AddItem.listBalance());
+        addRowToTable();
     }
-
+    
+    public void addRowToTable(){
+        DefaultTableModel model= (DefaultTableModel)jTable1.getModel();
+        ArrayList<InventoryItem> list=itemsAndTransactions.AddItem.listAllArrayList();
+        float totalValue=0;
+        Object rowData[]=new Object[8];
+        for (int i=0;i<list.size();i++){
+            rowData[0]=list.get(i).getItemCode();
+            rowData[1]=list.get(i).getName();
+            rowData[2]=list.get(i).getUm();
+            rowData[3]=AddTransaction.SumQCodeType(list.get(i).getItemCode(),"in");
+            rowData[4]=AddTransaction.SumQCodeType(list.get(i).getItemCode(),"out");
+            rowData[5]=list.get(i).getItemQ();           
+            rowData[6]=String.format("%.02f",list.get(i).getPrice());
+            rowData[7]=String.format("%.02f",list.get(i).getPrice()*list.get(i).getItemQ());
+            model.addRow(rowData);
+            totalValue+=list.get(i).getPrice()*list.get(i).getItemQ();
+            
+        }
+        
+            rowData[0]="Total";
+            rowData[1]="";
+            rowData[2]="";
+            rowData[3]="";
+            rowData[4]="";       
+            rowData[5]="";       
+            rowData[6]="";       
+            rowData[7]=String.format("%.02f",totalValue);           
+            model.addRow(rowData);
+        
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,8 +69,8 @@ public class BalanceFrame extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -48,9 +87,17 @@ public class BalanceFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Code", "Name", "UM", "Q in", "Q out", "Q final", "Price", "Value"
+            }
+        ));
+        jTable1.setColumnSelectionAllowed(true);
+        jScrollPane2.setViewportView(jTable1);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,24 +107,23 @@ public class BalanceFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(184, Short.MAX_VALUE))
+                        .addGap(186, 186, 186)
+                        .addComponent(jButton1)))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 64, Short.MAX_VALUE))
+                .addGap(55, 55, 55))
         );
 
         pack();
@@ -91,7 +137,7 @@ public class BalanceFrame extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

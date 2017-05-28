@@ -355,7 +355,143 @@ public static boolean ifExist(String newCode){
     return sum;
     }
 
+    public static ArrayList<Transaction> listAllTrArrayList(){
+    
+    ArrayList<Transaction> TrList=new ArrayList<Transaction>();
+    String url = "jdbc:derby://localhost:1527/InventoryDB;create=true";
+    String driver = "org.apache.derby.jdbc.ClientDriver";
+    Connection connection = null;
+    Statement statement = null;
+    ResultSet resultSet = null;
+        
+    try {
+        Class driverClass = Class.forName(driver);
+        connection = DriverManager.getConnection(url);
+        statement = connection.createStatement();
+            
+        resultSet = statement.executeQuery("SELECT * FROM TRANSACTIONS");
+        String currentType="",currentCode = ""; 
+        String currentDate = "",currentDescription = "";
+        int currentNoTr=0,currentQ=0;
+        Float currentPrice=0.0F;
+        
+        while (resultSet.next()) {
+                currentNoTr = Integer.parseInt(resultSet.getString(1));
+                currentDate = resultSet.getString(2);
+                currentType = resultSet.getString(3);
+                currentCode = resultSet.getString(4);
+                currentQ = Integer.parseInt(resultSet.getString(5));
+                currentPrice=Float.parseFloat(resultSet.getString(6));
+                currentDescription = resultSet.getString(7);
+                
+                Transaction newTransaction= new Transaction(currentNoTr);
+                newTransaction.setDate(currentDate);
+                newTransaction.setType(currentType);
+                newTransaction.setCode(currentCode);
+                newTransaction.setQ(currentQ);
+                newTransaction.setPrice(currentPrice);
+                newTransaction.setDescription(currentDescription);
+                
+                TrList.add(newTransaction);
+                
+        }
+    
+    }catch(ClassNotFoundException e){
+            System.out.println(e.getMessage());
+         }catch(NumberFormatException e){
+            System.out.println(e.getMessage());    
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
 
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+            if (connection != null){
+                try {
+                    connection.close();
+                }
+                catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    
+    return TrList;
+    }
+    
+ public static ArrayList<Transaction> listAllTrArrayListCode(String newCode){
+    
+    ArrayList<Transaction> TrList=new ArrayList<Transaction>();
+    String url = "jdbc:derby://localhost:1527/InventoryDB;create=true";
+    String driver = "org.apache.derby.jdbc.ClientDriver";
+    Connection connection = null;
+    Statement statement = null;
+    ResultSet resultSet = null;
+        
+    try {
+        Class driverClass = Class.forName(driver);
+        connection = DriverManager.getConnection(url);
+        statement = connection.createStatement();
+            
+        resultSet = statement.executeQuery("SELECT * FROM TRANSACTIONS WHERE CODE='"+newCode+"'");
+        String currentType="",currentCode = ""; 
+        String currentDate = "",currentDescription = "";
+        int currentNoTr=0,currentQ=0;
+        Float currentPrice=0.0F;
+        
+        while (resultSet.next()) {
+                currentNoTr = Integer.parseInt(resultSet.getString(1));
+                currentDate = resultSet.getString(2);
+                currentType = resultSet.getString(3);
+                currentCode = resultSet.getString(4);
+                currentQ = Integer.parseInt(resultSet.getString(5));
+                currentPrice=Float.parseFloat(resultSet.getString(6));
+                currentDescription = resultSet.getString(7);
+                
+                Transaction newTransaction= new Transaction(currentNoTr);
+                newTransaction.setDate(currentDate);
+                newTransaction.setType(currentType);
+                newTransaction.setCode(currentCode);
+                newTransaction.setQ(currentQ);
+                newTransaction.setPrice(currentPrice);
+                newTransaction.setDescription(currentDescription);
+                
+                TrList.add(newTransaction);
+                
+        }
+    
+    }catch(ClassNotFoundException e){
+            System.out.println(e.getMessage());
+         }catch(NumberFormatException e){
+            System.out.println(e.getMessage());    
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+            if (connection != null){
+                try {
+                    connection.close();
+                }
+                catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    
+    return TrList;
+    }
 
 
 }
