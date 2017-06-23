@@ -13,15 +13,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import sqlPackage.QueriesSQL;
 
-
-
 /**
- *
  * @author MMM
  */
 public class AddTransaction {
     public static int noOFTrans(){
-
         String url = "jdbc:derby://localhost:1527/InventoryDB;create=true";
         String driver = "org.apache.derby.jdbc.ClientDriver";
         Connection connection = null;
